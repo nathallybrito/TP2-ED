@@ -1,9 +1,9 @@
-#include "grafo.hpp"
+#include "../include/grafo.hpp"
 
 Grafo::Grafo(int v){
     this->v = v;
     listaAdj = new Node*[v];
-    for( int i = 0; i < v, i++){
+    for( int i = 0; i < v; i++){
         listaAdj[i] = nullptr;
     }
 }   
