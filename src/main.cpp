@@ -1,3 +1,8 @@
+//---------------------------------------------------------------------
+// Arquivo	: main.cpp
+// Conteudo	: programa de avaliação do trabalho
+// Autor	: Náthally Fernandes. (nathallyfernandes@ufmg.br)
+//---------------------------------------------------------------------
 #include <iostream>
 #include "../include/grafo.hpp"
 
