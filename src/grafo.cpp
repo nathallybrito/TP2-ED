@@ -32,7 +32,7 @@ void Grafo::imprimirGrafo() {
             std::cout << i << " ->";
             Node* currentNode = listaAdj[i];
             while (currentNode) {
-                std::cout << " " << currentNode->vertice;
+                std::cout << " " << currentNode->vertice ;
                 currentNode = currentNode->proximo;
             }
             std::cout << std::endl;
