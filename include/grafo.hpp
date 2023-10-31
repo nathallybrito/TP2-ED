@@ -16,11 +16,13 @@ class Grafo{
 private: 
     int v; //Número de vértices
     Node** listaAdj;
+    int* cores;
 public:
 Grafo(int v);
 ~Grafo();
 void adicionarAresta(int origem,int destino);
 void imprimirGrafo();
+void defineCor(int vertice, int cor);
 };
 
 

@@ -2,23 +2,25 @@
 #include "../include/grafo.hpp"
 
 int main(){
-int v; // Número de vértices
-    std::cout << "Digite o número de vértices: ";
+    int v; // Número de vértices
     std::cin >> v;
 
     Grafo grafo(v);
 
     for (int i = 0; i < v; ++i) {
         int numVizinhos;
-        std::cout << "Digite o número de vizinhos do vértice " << i << ": ";
         std::cin >> numVizinhos;
 
-        std::cout << "Digite os vizinhos do vértice " << i << ": ";
         for (int j = 0; j < numVizinhos; ++j) {
             int vizinho;
             std::cin >> vizinho;
             grafo.adicionarAresta(i, vizinho);
         }
+    }
+    for (int i = 0; i < v; ++i) {
+        int cor;
+        std::cin >> cor;
+        grafo.defineCor(i, cor);
     }
 
     grafo.imprimirGrafo();

@@ -3,8 +3,10 @@
 Grafo::Grafo(int v){
     this->v = v;
     listaAdj = new Node*[v];
+    cores = new int[v];
     for( int i = 0; i < v ; i++){
         listaAdj[i] = nullptr;
+        cores[i] = -1;
     }
 }   
 
@@ -18,6 +20,7 @@ Grafo::~Grafo(){
             }
         }
         delete[] listaAdj;
+        delete[] cores;
 }
 
 void Grafo::adicionarAresta(int origem, int destino){
@@ -25,6 +28,10 @@ void Grafo::adicionarAresta(int origem, int destino){
     newNode->vertice = destino;
     newNode->proximo = listaAdj[origem];
     listaAdj[origem] = newNode; 
+}
+
+void Grafo::defineCor(int vertice, int cor){
+    cores[vertice] = cor;
 }
 
 void Grafo::imprimirGrafo() {
@@ -35,7 +42,7 @@ void Grafo::imprimirGrafo() {
                 std::cout << " " << currentNode->vertice ;
                 currentNode = currentNode->proximo;
             }
-            std::cout << std::endl;
+            std::cout << " Cor:" << cores[i]<< std::endl;
         }
     }
 
