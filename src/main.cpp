@@ -1,5 +1,5 @@
-#include<iostream>
-#include "grafo.hpp"
+#include <iostream>
+#include "../include/grafo.hpp"
 
 int main(){
 int v; // Número de vértices

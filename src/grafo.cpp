@@ -1,4 +1,4 @@
-#include "grafo.hpp"
+#include "../include/grafo.hpp"
 
 Grafo::Grafo(int v){
     this->v = v;
