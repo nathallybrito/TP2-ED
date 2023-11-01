@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------
 // Arquivo	: grafo.hpp
-// Conteudo	: definicoes da Lista de Adjacencia e dos métodos de ordenação
+// Conteudo	: definicoes da Lista de Adjacencia que monta meu grafo
 // Autor	: Náthally Fernandes. (nathallyfernandes@ufmg.br)
 //---------------------------------------------------------------------
 #ifndef GRAFO_HPP
@@ -23,8 +23,7 @@ Grafo(int v);
 void adicionarAresta(int origem,int destino);
 void imprimirGrafo();
 void defineCor(int vertice, int cor);
-void quiksort(int* n );
-
+void boobleSort(Node** listaAadj,int cor);
 };
 
 

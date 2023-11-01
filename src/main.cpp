@@ -24,6 +24,8 @@ void uso()
 int main(){
     // montagem do grafo
     int v; // Número de vértices
+    int* cores;
+    Node** listaAdj;
     std::cin >> v;
 
     Grafo grafo(v);
@@ -44,23 +46,24 @@ int main(){
         grafo.defineCor(i, cor);
     }
 
+   // grafo.boobleSort(listaAdj,cores);
     grafo.imprimirGrafo();
 
-    // escolhe o método utilizado
-    char metodo;
-    std:: cin >> metodo;
+    // // escolhe o método utilizado
+    // char metodo;
+    // std:: cin >> metodo;
 
-    if( metodo == -b ){
-        //implementação do bubble sort 
-    }
+    // if( metodo == -b ){
+    //     //implementação do bubble sort 
+    // }
 
-    if(metodo == -s) {
-        // implementação selection sort
-    }
+    // if(metodo == -s) {
+    //     // implementação selection sort
+    // }
 
-    if(metodo == -i){
-        // implementação insertion sort
-    }
+    // if(metodo == -i){
+    //     // implementação insertion sort
+    // }
 
     
 

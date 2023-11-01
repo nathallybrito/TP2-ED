@@ -46,5 +46,15 @@ void Grafo::imprimirGrafo() {
         }
     }
 
+void Grafo::boobleSort(Node** listaAadj,int cor){
+    int i, j;
+    for(i = 0; i < cor -1; i++)
+    for(j = 1; j < cor -i; j++)
+      if (listaAadj[j].chave < v[j-1].chave) 
+        Troca(v[j-1], v[j]);
+}
+
+    }
+
 
 
