@@ -23,6 +23,8 @@ Grafo(int v);
 void adicionarAresta(int origem,int destino);
 void imprimirGrafo();
 void defineCor(int vertice, int cor);
+void quiksort(int* n );
+
 };
 
 
