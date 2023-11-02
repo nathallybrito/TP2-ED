@@ -1,5 +1,6 @@
 #include "../include/grafo.hpp"
 
+
 Grafo::Grafo(int v){
     this->v = v;
     listaAdj = new Node*[v];
@@ -34,27 +35,50 @@ void Grafo::defineCor(int vertice, int cor){
     cores[vertice] = cor;
 }
 
-void Grafo::imprimirGrafo() {
-     for (int i= 0; i < v; ++i) {
-            std::cout << i << " ->";
-            Node* currentNode = listaAdj[i];
-            while (currentNode) {
-                std::cout << " " << currentNode->vertice ;
-                currentNode = currentNode->proximo;
+
+void Grafo::imprimirGrafo(const int* indices) {
+    for (int i = 0; i < v; i++) {
+        int vertexIndex = indices[i];
+        std::cout << vertexIndex << " ";
+    }
+    std::cout << std::endl;
+    }
+
+void Grafo::bubbleSort() {
+    
+ // Crie uma matriz auxiliar para armazenar os índices dos vértices
+    int* indices = new int[v];
+    for (int i = 0; i < v; i++) {
+        indices[i] = i;
+    }
+
+    // Implemente a ordenação Bubble Sort com base nas cores dos vértices
+    for (int i = 0; i < v - 1; i++) {
+        for (int j = 0; j < v - i - 1; j++) {
+            if (cores[indices[j]] > cores[indices[j + 1]]) {
+                std::swap(indices[j], indices[j + 1]);
             }
-            std::cout << " Cor:" << cores[i]<< std::endl;
         }
     }
 
-void Grafo::boobleSort(Node** listaAadj,int cor){
-    int i, j;
-    for(i = 0; i < cor -1; i++)
-    for(j = 1; j < cor -i; j++)
-      if (listaAadj[j].chave < v[j-1].chave) 
-        Troca(v[j-1], v[j]);
+    // Chame a função para imprimir o grafo ordenado
+    imprimirGrafo(indices);
+
+    // Libere a memória alocada
+    delete[] indices;
+
+    
 }
 
-    }
+
+
+
+
+
+
+
+
+
 
 
 

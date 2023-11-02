@@ -11,22 +11,23 @@ void uso()
 //Descrição:imprime as opções de uso
 //A saída é a impressão das opções de linhas de comando no makefile 
 {
-    std::cout<<  "\t -b  \t  bubble sort \n" << std::endl;
-    std::cout<<  " \t -s \t  Selection Sort \n "<< std::endl;
-    std::cout<<  " \t -i \t  insertion sort \n "<< std::endl;
-    std::cout<<  " \t -q \t  quicksort  \n "<< std::endl;
-    std::cout<<  " \t -m \t  merge sort \n "<< std::endl;
-    std::cout<<  " \t -p \t  heapsort \n "<< std::endl;
-    std::cout<<  " \t -y \t  método próprio \n "<< std::endl;
+    std::cout<<  "\t b  \t  bubble sort \n" << std::endl;
+    std::cout<<  " \t s \t  Selection Sort \n "<< std::endl;
+    std::cout<<  " \t i \t  insertion sort \n "<< std::endl;
+    std::cout<<  " \t q \t  quicksort  \n "<< std::endl;
+    std::cout<<  " \t m \t  merge sort \n "<< std::endl;
+    std::cout<<  " \t p \t  heapsort \n "<< std::endl;
+    std::cout<<  " \t y \t  método próprio \n "<< std::endl;
    
 }
 
+
+
 int main(){
     // montagem do grafo
-    int v; // Número de vértices
-    int* cores;
-    Node** listaAdj;
-    std::cin >> v;
+    int v; // Número de vértice
+    
+     std::cin >> v;
 
     Grafo grafo(v);
 
@@ -42,12 +43,24 @@ int main(){
     }
     for (int i = 0; i < v; ++i) {
         int cor;
+
         std::cin >> cor;
         grafo.defineCor(i, cor);
     }
 
-   // grafo.boobleSort(listaAdj,cores);
-    grafo.imprimirGrafo();
+   /* switch (uso)
+    {
+    case "b":
+        grafo.bubbleSort();
+        break;
+    
+    default:
+        break;
+    }*/
+
+
+    //grafo.bubbleSort();
+    //grafo.imprimirGrafo();
 
     // // escolhe o método utilizado
     // char metodo;

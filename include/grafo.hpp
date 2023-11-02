@@ -15,15 +15,15 @@ struct Node{
 class Grafo{
 private: 
     int v; //Número de vértices
-    Node** listaAdj;
     int* cores;
 public:
+Node** listaAdj;
 Grafo(int v);
 ~Grafo();
 void adicionarAresta(int origem,int destino);
-void imprimirGrafo();
+void imprimirGrafo(const int* indices);
 void defineCor(int vertice, int cor);
-void boobleSort(Node** listaAadj,int cor);
+void bubbleSort();
 };
 
 
