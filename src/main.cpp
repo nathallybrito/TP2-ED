@@ -21,13 +21,11 @@ void uso()
    
 }
 
-
-
 int main(){
     // montagem do grafo
     int v; // Número de vértice
-    
-     std::cin >> v;
+    char metodo; // escolha do método de ordenação.
+     std::cin >> metodo >> v;
 
     Grafo grafo(v);
 
@@ -48,37 +46,30 @@ int main(){
         grafo.defineCor(i, cor);
     }
 
-   /* switch (uso)
+    switch (metodo)
     {
-    case "b":
+    case 'b':
         grafo.bubbleSort();
         break;
-    
-    default:
+    case 's':
+        grafo.selectionSort();
         break;
-    }*/
-
-
-    //grafo.bubbleSort();
-    //grafo.imprimirGrafo();
-
-    // // escolhe o método utilizado
-    // char metodo;
-    // std:: cin >> metodo;
-
-    // if( metodo == -b ){
-    //     //implementação do bubble sort 
-    // }
-
-    // if(metodo == -s) {
-    //     // implementação selection sort
-    // }
-
-    // if(metodo == -i){
-    //     // implementação insertion sort
-    // }
-
-    
+    case 'i':
+        grafo.insertionSort();
+        break;
+    case 'q':
+        grafo.quicksort();
+        break;
+    case 'm' :
+        grafo.mergeSort();
+        break;
+    case 'p':
+        grafo.heapsort();
+        break;
+    default:
+        std::cout<< "Escolha inválida" << std::endl;
+    }
+  
 
     return 0;
 
