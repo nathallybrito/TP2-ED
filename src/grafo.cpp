@@ -114,28 +114,32 @@ void Grafo :: insertionSort(){
     delete[] indices;
 }
 
-int Grafo::particao(int* indices,int esq,int dir){
-    int pivot = indices[dir];
-    int i = (esq- 1);
+int Grafo::particao(int* indices, int esq, int dir) {
+    int pivot = indices[dir]; // Use indices[dir] as the pivot
+    int i = esq - 1;
 
-    for (int j = esq; j <= dir - 1; j++) {
-        // Se o elemento atual for menor ou igual ao pivô
-        if (cores[indices[j]] <= cores[pivot]) {
+    for (int j = esq; j <= dir; j++) { // Iterate from esq to dir
+        // Compare colors first (less than)
+        if (cores[indices[j]] < cores[pivot] || (cores[indices[j]] == cores[pivot] && indices[j] < pivot)) {
             i++;
             std::swap(indices[i], indices[j]);
         }
     }
+
     std::swap(indices[i + 1], indices[dir]);
-    return (i + 1);
+    return i + 1;
 }
+
 
 void Grafo::ordena_quick(int* indices, int esq, int dir){
     if (esq < dir){
-        int pivot = particao (indices, esq, dir);
-        ordena_quick(indices, esq, pivot-1);
-        ordena_quick(indices, pivot + 1,dir);
+        int pivot = particao(indices, esq, dir);
+        ordena_quick(indices, esq, pivot - 1);
+        ordena_quick(indices, pivot + 1, dir);
     }
 }
+
+
 void Grafo::quicksort(){
     int* indices= matrizIndices();
 
@@ -219,27 +223,25 @@ void Grafo::mergeSort() {
 }
 
 
-// Função para ajustar um subárvore com raiz em um determinado nó
 void Grafo::heapify(int* indices, int n, int i) {
-    int maior = i;
+    int menor = i;
     int esquerda = 2 * i + 1;
     int direita = 2 * i + 2;
 
-    // Se o filho esquerdo for maior que a raiz
-    if (esquerda < n && cores[indices[esquerda]] > cores[indices[maior]]) {
-        maior = esquerda;
+    // Compare colors first (greater than)
+    if (esquerda < n && (cores[indices[esquerda]] > cores[indices[menor]] || 
+        (cores[indices[esquerda]] == cores[indices[menor]] && indices[esquerda] > indices[menor]))) {
+        menor = esquerda;
     }
 
-    // Se o filho direito for maior que a raiz
-    if (direita < n && cores[indices[direita]] > cores[indices[maior]]) {
-        maior = direita;
+    if (direita < n && (cores[indices[direita]] > cores[indices[menor]] || 
+        (cores[indices[direita]] == cores[indices[menor]] && indices[direita] > indices[menor]))) {
+        menor = direita;
     }
 
-    // Se o maior não é a raiz
-    if (maior != i) {
-        std::swap(indices[i], indices[maior]);
-        // Recursivamente ajustar a subárvore afetada
-        heapify(indices, n, maior);
+    if (menor != i) {
+        std::swap(indices[i], indices[menor]);
+        heapify(indices, n, menor);
     }
 }
 
@@ -247,22 +249,18 @@ void Grafo::heapsort(){
     int* indices = matrizIndices();
     int n = v;
 
-    // Construir heap (reorganize array)
     for (int i = n / 2 - 1; i >= 0; i--) {
         heapify(indices, n, i);
     }
 
-    // Extrair elementos um por um do heap
     for (int i = n - 1; i > 0; i--) {
-        // Mova a raiz atual para o final
         std::swap(indices[0], indices[i]);
-        // chame heapify na subárvore reduzida
         heapify(indices, i, 0);
     }
     imprimirGrafo(indices);
     delete[] indices;
-
 }
+
 
 
 
