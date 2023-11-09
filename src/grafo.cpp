@@ -1,4 +1,10 @@
+//----------------------------------------------------------------------------------
+// Arquivo	: grafo.cpp
+// Conteudo	: Implementação do grafo,dos métodos de ordenação e algoritmo gulso
+// Autor	: Náthally Fernandes. (nathallyfernandes@ufmg.br)
+//----------------------------------------------------------------------------------
 #include "../include/grafo.hpp"
+#include <exception>
 
 
 Grafo::Grafo(int v){
@@ -13,18 +19,23 @@ Grafo::Grafo(int v){
 
 Grafo::~Grafo(){
     for(int i = 0; i < v; i++){
-            Node* atual = listaAdj[i];
-            while (atual) {
-                Node* nextNode = atual->proximo;
-                delete atual;
-                atual = nextNode;
-            }
+        Node* atual = listaAdj[i];
+        while (atual) {
+        Node* nextNode = atual->proximo;
+        delete atual;
+        atual = nextNode;
         }
+    }
         delete[] listaAdj;
         delete[] cores;
 }
 
 void Grafo::adicionarAresta(int origem, int destino){
+    if (origem < 0 || origem >= v || destino < 0 || destino >= v) {
+        std::cerr << "Erro: Vértice de origem ou destino fora do intervalo permitido." << std::endl;
+        throw std::out_of_range("Vértice fora do intervalo permitido");
+    }
+
     Node* newNode = new Node;
     newNode->vertice = destino;
     newNode->proximo = listaAdj[origem];
@@ -32,6 +43,10 @@ void Grafo::adicionarAresta(int origem, int destino){
 }
 
 void Grafo::defineCor(int vertice, int cor){
+    if (vertice < 0 || vertice >= v) {
+        std::cerr << "Erro: Vértice fora do intervalo permitido." << std::endl;
+        throw std::out_of_range("Vértice fora do intervalo permitido");
+    }
     cores[vertice] = cor;
 }
 
@@ -47,10 +62,6 @@ bool Grafo::algoritmoGuloso() {
     for (int i = 0; i < v; i++) {
         Node* atual = listaAdj[i];
         int corVertex = cores[i];
-
-        if (corVertex == -1) {
-            continue;  // Skip uncolored vertices
-        }
 
         bool coresVizinhos[v] = {false};  // Inicializa um vetor de booleanos
 
@@ -92,7 +103,7 @@ void Grafo::bubbleSort() {
     for (int i = 0; i < v - 1; i++) {
         for (int j = 0; j < v - i - 1; j++) {
             if (cores[indices[j]] > cores[indices[j + 1]]) {
-                std::swap(indices[j], indices[j + 1]);
+                std::swap (indices[j], indices[j + 1]);
             }
         }
     }
@@ -181,9 +192,9 @@ void Grafo::quicksort(){
 }
 
 // Função auxiliar para mesclar dois subarrays
-void Grafo::merge(int* indices, int low, int mid, int high) {
-    int n1 = mid - low + 1;
-    int n2 = high - mid;
+void Grafo::merge(int* indices, int esq, int mid, int dir) {
+    int n1 = mid - esq + 1;
+    int n2 = dir - mid;
 
     // Crie arrays temporários para armazenar os elementos
     int* L = new int[n1];
@@ -191,16 +202,16 @@ void Grafo::merge(int* indices, int low, int mid, int high) {
 
     // Copie os elementos para os arrays temporários L[] e R[]
     for (int i = 0; i < n1; i++) {
-        L[i] = indices[low + i];
+        L[i] = indices[esq + i];
     }
     for (int j = 0; j < n2; j++) {
         R[j] = indices[mid + 1 + j];
     }
 
-    // Mesclar os arrays temporários de volta em indices[low..high]
+    // Mesclar os arrays temporários de volta em indices[esq..dir]
     int i = 0;
     int j = 0;
-    int k = low;
+    int k = esq;
 
     while (i < n1 && j < n2) {
         if (cores[L[i]] <= cores[R[j]]) {
@@ -232,13 +243,13 @@ void Grafo::merge(int* indices, int low, int mid, int high) {
     delete[] R;
 }
 
-// Função principal para ordenar um subarray indices[low..high] usando MergeSort
-void Grafo::mergeSort(int* indices, int low, int high) {
-    if (low < high) {
-        int mid = low + (high - low) / 2;
-        mergeSort(indices, low, mid);
-        mergeSort(indices, mid + 1, high);
-        merge(indices, low, mid, high);
+// Função principal para ordenar um subarray indices[esq..dir] usando MergeSort
+void Grafo::mergeSort(int* indices, int esq, int dir) {
+    if (esq < dir) {
+        int mid = esq + (dir - esq) / 2;
+        mergeSort(indices, esq, mid);
+        mergeSort(indices, mid + 1, dir);
+        merge(indices, esq, mid, dir);
     }
 }
 
@@ -290,6 +301,27 @@ void Grafo::heapsort(){
     }
     imprimirGrafo(indices);
     delete[] indices;
+}
+
+// baseado no método BubbleSort, so que movendo o vetor da direita pra esquerda
+void Grafo::mysort(){
+    int* indices = matrizIndices();
+
+    // Implemente a ordenação Bubble Sort com base nas cores dos vértices, da direita para a esquerda
+    for (int i = 0; i < v - 1; i++) {
+        for (int j = v - 1; j > i; j--) {
+            if (cores[indices[j - 1]] > cores[indices[j]]) {
+                std::swap(indices[j - 1], indices[j]);
+            }
+        }
+    }
+
+    // Chame a função para imprimir o grafo ordenado
+    imprimirGrafo(indices);
+
+    // Libere a memória alocada
+    delete[] indices;
+
 }
 
 
