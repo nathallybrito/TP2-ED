@@ -1,5 +1,4 @@
 #include "../include/grafo.hpp"
-#include <set>
 
 
 Grafo::Grafo(int v){
@@ -14,11 +13,11 @@ Grafo::Grafo(int v){
 
 Grafo::~Grafo(){
     for(int i = 0; i < v; i++){
-            Node* currentNode = listaAdj[i];
-            while (currentNode) {
-                Node* nextNode = currentNode->proximo;
-                delete currentNode;
-                currentNode = nextNode;
+            Node* atual = listaAdj[i];
+            while (atual) {
+                Node* nextNode = atual->proximo;
+                delete atual;
+                atual = nextNode;
             }
         }
         delete[] listaAdj;
@@ -42,6 +41,38 @@ int* Grafo::matrizIndices(){
         indices[i] = i;
     }
     return indices;
+}
+
+bool Grafo::algoritmoGuloso() {
+    for (int i = 0; i < v; i++) {
+        Node* atual = listaAdj[i];
+        int corVertex = cores[i];
+
+        if (corVertex == -1) {
+            continue;  // Skip uncolored vertices
+        }
+
+        bool coresVizinhos[v] = {false};  // Inicializa um vetor de booleanos
+
+        for (Node* vizinho = atual; vizinho != nullptr; vizinho = vizinho->proximo) {
+            int corVizinho = cores[vizinho->vertice];
+
+            if (corVizinho > 0 && corVizinho < corVertex) {
+                coresVizinhos[corVizinho - 1] = true;  // Marca a posição correspondente ao vetor de cores
+            }
+        }
+
+        // Verifica se há alguma cor ausente no vetor
+        if (corVertex > 1) {
+            for (int k = 0; k < corVertex - 1; k++) {
+                if (!coresVizinhos[k]) {
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
 }
 
 void Grafo::imprimirGrafo(const int* indices) {

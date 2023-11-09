@@ -45,6 +45,9 @@ int main(){
         std::cin >> cor;
         grafo.defineCor(i, cor);
     }
+    
+if (grafo.algoritmoGuloso()) {
+    std::cout << "1 ";
 
     switch (metodo)
     {
@@ -69,8 +72,10 @@ int main(){
     default:
         std::cout<< "Escolha inválida" << std::endl;
     }
-  
-
+} else {
+        std::cout << "0 ";
+    }
+    
     return 0;
 
 }

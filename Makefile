@@ -17,12 +17,17 @@ OBJS = $(OBJ)/main.o $(OBJ)/grafo.o
 HDRS = $(INC)/grafo.hpp
 CFLAGS = -Wall -c -g -I$(INC)
 
-EXE = $(BIN)/main
+EXE = $(BIN)/tp2.out
+
+run:  $(EXE)
+	 ./ $(EXE)
 
 all:  $(EXE)
+
+
 	
-$(BIN)/main: $(OBJS)
-	$(CC) -g -o $(BIN)/main $(OBJS) $(LIBS)
+$(BIN)/tp2.out: $(OBJS)
+	$(CC) -g -o $(BIN)/tp2.out $(OBJS) $(LIBS)
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp

@@ -27,7 +27,7 @@ int* matrizIndices();
 void bubbleSort();
 void selectionSort();
 void insertionSort();
-int particao(int* indices,int esq,int dir);
+int  particao(int* indices,int esq,int dir);
 void ordena_quick(int* indices,int esq, int dir);
 void quicksort();
 void merge(int* indices, int low, int mid, int high);
